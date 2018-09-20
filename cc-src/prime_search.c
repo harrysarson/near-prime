@@ -84,32 +84,32 @@ int comb(const char * src, char * dest, int K) {
 	int N = strlen(src);
 	int i;
 
-	uint8_t * bitmask = calloc((N - 1)/ 8 + 1, sizeof(*bitmask));
+	uint8_t * const bitmask = calloc((N - 1)/ 8 + 1, sizeof(*bitmask));
 	for (i = 0; i < K; i++) {
 		bitset_set(bitmask, i, 1);
 	}
 
     // print integers and permute bitmask
 	int res = 0;
-    do {
+	do {
 		strcpy(dest, src); 
 		dest[N-1] = '1';
-        for (int i = 0; i < N; ++i) {
-            if (bitset_get(bitmask, i)) tweak_string(dest, i);
-        }
+	    for (int i = 0; i < N; ++i) {
+	        if (bitset_get(bitmask, i)) tweak_string(dest, i);
+	    }
 		res = miller_rabin(dest, 8);
 		if (res != 0) {
 			break;
 		}
-    } while (prev_perm(bitmask, N));
+	} while (prev_perm(bitmask, N));
 
-	free(bitmask);
+ 	free(bitmask);
 	return res;
 }
 
 int find_candidate(char * str) {
-	int len = strlen(str);
-	char * buffer = malloc(len);
+	const int len = strlen(str);
+	char * const buffer = malloc(len + 1);
 	int res = 0;
 	for (int i = 0; i < len; i++) {
 		res = comb(str, buffer, i);
