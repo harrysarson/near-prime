@@ -14,6 +14,7 @@
   },
   "homepage": "https://github.com/harrysarson/near-prime#readme",
   "dependencies": {
+    "@koa/cors": "^2.2.2",
     "bindings": "^1.3.0",
     "debug": "^4.0.1",
     "koa": "^2.5.3",

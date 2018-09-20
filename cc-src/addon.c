@@ -2,8 +2,7 @@
 #include <assert.h>
 #include <stdlib.h>
 #include <stdio.h>
-
-int find_candidate(char *);
+#include "prime_search.h"
 
 napi_value wrapped_find_candidate(napi_env env, napi_callback_info info) {
   napi_status status;
@@ -29,11 +28,11 @@ napi_value wrapped_find_candidate(napi_env env, napi_callback_info info) {
   
   assert(status == napi_ok);
 
-  char * string = malloc(string_length);
+  char * const string = malloc(string_length);
   status = napi_get_value_string_utf8(env, args[0], string, string_length, NULL);
   assert(status == napi_ok);
 
-  int32_t result = find_candidate(string);
+  const int32_t result = find_candidate(string);
   
   napi_value js_result;
   status = napi_create_int32(env, result, &js_result);
