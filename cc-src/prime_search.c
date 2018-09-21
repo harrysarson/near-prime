@@ -94,7 +94,7 @@ int comb(const char * src, char * dest, int K) {
 	do {
 		strcpy(dest, src); 
 		dest[N-1] = '1';
-	    for (int i = 0; i < N; ++i) {
+	    for (i = 0; i < N; ++i) {
 	        if (bitset_get(bitmask, i)) tweak_string(dest, i);
 	    }
 		res = miller_rabin(dest, 8);
@@ -110,8 +110,9 @@ int comb(const char * src, char * dest, int K) {
 int find_candidate(char * str) {
 	const int len = strlen(str);
 	char * const buffer = malloc(len + 1);
+	int i;
 	int res = 0;
-	for (int i = 0; i < len; i++) {
+	for (i = 0; i < len; i++) {
 		res = comb(str, buffer, i);
 		if (res != 0) {
 			strcpy(str, buffer);
